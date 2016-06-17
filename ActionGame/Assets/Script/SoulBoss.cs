@@ -8,6 +8,7 @@ public class SoulBoss : MonoBehaviour
 
     private CharacterController cController;
     private Transform player;
+    private PlayerATKAndDamage atkAndDamage;
     private Animator bossAnim;
 
     private float attackTime = 3;
@@ -18,11 +19,18 @@ public class SoulBoss : MonoBehaviour
         cController = GetComponent<CharacterController>();
         bossAnim = this.GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag(Tags.player).transform;
+        atkAndDamage = player.GetComponent<PlayerATKAndDamage>();
         attackTimer = attackTime;
     }
 
     void Update()
     {
+        if (atkAndDamage.hp <= 0)
+        {
+            bossAnim.SetBool("walk", false);
+            return;
+        }
+
         transform.LookAt(player.position);
         float distance = Vector3.Distance(player.position, transform.position);
         if (distance < attackDistance)//在攻击范围之内
