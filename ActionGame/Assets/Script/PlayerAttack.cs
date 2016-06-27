@@ -10,7 +10,6 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         playerAnim = GetComponent<Animator>();
-
         attackDeleaget = GameObject.FindObjectOfType<AttackDeleaget>();
         attackDeleaget.OnAttackNormal += NormalAttack;
         attackDeleaget.OnAttackRange += RangeAttack;
@@ -37,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
     /// </summary>
     void RedAttack()
     {
-        playerAnim.SetTrigger("attacka");
+        playerAnim.SetTrigger("attackgun");
     }
 
     /// <summary>
@@ -60,8 +59,8 @@ public class PlayerAttack : MonoBehaviour
 
     void OnDestroy()
     {
-        attackDeleaget.OnAttackNormal -= NormalAttack;
-        attackDeleaget.OnAttackRange -= RangeAttack;
-        attackDeleaget.OnAttackRed -= RedAttack;
+        //attackDeleaget.OnAttackNormal -= NormalAttack;
+        //attackDeleaget.OnAttackRange -= RangeAttack;
+        //attackDeleaget.OnAttackRed -= RedAttack;
     }
 }

@@ -24,7 +24,7 @@ public class Award : MonoBehaviour {
         if(m_startMove)
         {
             transform.position = Vector3.Lerp(transform.position, m_player.position + Vector3.up, Time.deltaTime * speed);
-            if (Vector3.Distance(transform.position, m_player.position + Vector3.up) < 0.5)
+            if (Vector3.Distance(transform.position, m_player.position + Vector3.up) < 0.8)
             {
                 m_player.GetComponent<PlayerAward>().GetAward(award);
                 Destroy(this.gameObject);

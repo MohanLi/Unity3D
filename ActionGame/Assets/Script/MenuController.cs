@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
+    public static MenuController _instance;
+
     #region 变量定义
     public Color purple;
     public SkinnedMeshRenderer headMeshRenderer;
@@ -11,7 +13,9 @@ public class MenuController : MonoBehaviour
     public SkinnedMeshRenderer[] bodyMeshRenderer;
     public Mesh[] headMesh;
     public Mesh[] handMesh;
-    private Color[] bodyColor;
+
+    [HideInInspector]
+    public Color[] bodyColor;
 
     private int headMeshIndex = 0;
     private int handMeshIndex = 0;
@@ -20,6 +24,11 @@ public class MenuController : MonoBehaviour
     #endregion
 
     #region 初始化
+
+    void Awake()
+    {
+        _instance = this;
+    }
 
     void Start()
     {
@@ -166,6 +175,8 @@ public class MenuController : MonoBehaviour
         PlayerPrefs.SetInt("headMeshIndex", headMeshIndex);
         PlayerPrefs.SetInt("handMeshIndex", handMeshIndex);
         PlayerPrefs.SetInt("bodyColorIndex", bodyColorIndex);
+
+        SceneManager.LoadScene("002-play");
     }
     #endregion
 }

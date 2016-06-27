@@ -5,6 +5,7 @@ public class SoulBossATKAndDamage : ATKAndDamage
 {
     public float thumpAttack = 90;
     private Transform player;
+    public AudioClip attackClip;
 
     void Awake()
     {
@@ -15,26 +16,25 @@ public class SoulBossATKAndDamage : ATKAndDamage
     //重击
     public void SoulBossAttack1()
     {
-        if (IsCanAttack())
-        {
-           // player.GetComponent<ATKAndDamage>().TakeDamage(thumpAttack);
-        }
+        PlayAttackEffect();
         player.GetComponent<ATKAndDamage>().TakeDamage(thumpAttack);
     }
 
     //普通攻击
     public void SoulBossAttack2()
     {
-        if (IsCanAttack())
-        {
-            player.GetComponent<ATKAndDamage>().TakeDamage(normalAttack);
-        }
+        PlayAttackEffect();
+        player.GetComponent<ATKAndDamage>().TakeDamage(normalAttack);
     }
 
     //是否在攻击范围之内
     private bool IsCanAttack()
     {
-        Debug.Log("==============" + Vector3.Distance(player.position, transform.position));
         return Vector3.Distance(player.position, transform.position) <= attackDistance;
+    }
+
+    private void PlayAttackEffect()
+    {
+        AudioSource.PlayClipAtPoint(attackClip, transform.position, 0.8f);
     }
 }
